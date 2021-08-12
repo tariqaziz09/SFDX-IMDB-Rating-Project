@@ -1,0 +1,27 @@
+.THIS .myBtn  {
+    width: 720px;
+    position: absolute;
+  	left: 0px;
+}
+.THIS .toggleClass  {
+    background-color:#1a1a00 ;
+    color: white;
+    
+}
+.THIS.outer-div {
+    position: relative;
+    left: 0px;
+    width: 720px;
+    
+}
+.THIS .spinner {
+    position: absolute;
+    opacity: 10;
+    height:1370px;
+  	top: 0;
+
+}
+.THIS .buttonCss{
+    position:relative;
+    bottom: 1375px;   
+}

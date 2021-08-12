@@ -1,0 +1,11 @@
+.THIS {
+}
+.THIS.headers,.THIS.text{
+    display: inline}
+
+.THIS .toggleClass  {
+    background-color:#1a1a00 ;
+    color: white;
+    border-color:grey;
+    
+}

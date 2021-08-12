@@ -1,0 +1,93 @@
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes,forceCommunity:availableForAllPageTypes" access="global"
+                controller="MovieRating">
+    <aura:attribute name="MovieDetail" type="object"/>
+    <aura:attribute name="Show" type="boolean" default="false"/>
+    <aura:attribute name="videoUrl" type="Url"/>
+    <aura:registerEvent name="buttonsubmit" type="c:buttonsubmit"/>
+    <aura:handler event="c:SelectedMovie" action="{!c.getSelectedMovie}"/>
+    <aura:handler event="c:ToggleChange" action="{!c.getCss}"/>
+    <aura:attribute name="loaded" type="Boolean" default="false" />
+    <aura:attribute name="toggleCss" type="String" default="" />
+    <aura:if isTrue="{!(v.loaded) }"><lightning:spinner alternativeText="Loading" /></aura:if>
+    <div class="c-container">
+    <lightning:layout horizontalAlign="center" verticalAlign="end">
+	        
+        <lightning:layoutItem class="slds-grid_vertical-align-center">
+           <div onkeyup="{! c.handleEnter }">
+    <lightning:input
+            aura:id="enter-search"
+            name="enter-search"
+            label="Search Movie"
+            type="search"
+            onchange="{!c.resetVal}"
+        />
+            </div>
+        </lightning:layoutItem>
+        <lightning:layoutItem class="slds-grid_vertical-align-center">
+   <lightning:button variant="brand" label="Search" title="Search" onclick="{! c.handleClick }" /> 
+        </lightning:layoutItem>
+        </lightning:layout>
+    <aura:if isTrue="{!v.Show}">
+    	<aura:if isTrue="{!and(not(empty(v.MovieDetail)),v.MovieDetail.Response!='False')}">
+       	 <lightning:card iconName="utility:video" class="{!v.toggleCss}">
+            <aura:set attribute="title">
+                <div class="slds-text-heading--large">
+                <a href="javascript:void(0)" onclick="{!c.openImdb}">{!v.MovieDetail.Title}</a>
+                    </div>
+        </aura:set>
+        <lightning:layout   multipleRows="true">
+            <lightning:layoutitem flexibility="auto" size="3" >
+                <div >
+                        <img src="{!v.MovieDetail.Poster}"/>
+                </div>
+            </lightning:layoutitem>    
+            <lightning:layoutitem flexibility="auto" size="5" padding="around-small">
+                <div class="slds-text-align--left">
+                    <div >
+                        <span class="slds-text-heading--label">IMDB: </span><span>{!v.MovieDetail.imdbRating}/10</span>
+                        <span></span>
+                    </div>
+                    <div >
+                        <span class="slds-text-heading--label">Rotten Tomatoes: </span><span>{!v.MovieDetail.ratings[1].Value}</span>
+                        <span></span>
+                    </div>
+                     <div class="slds-text-align--left">
+                        <span class="slds-text-heading--label">Metascore: </span><span>{!v.MovieDetail.metaScore}/100</span>
+                        <span></span>
+                    </div>
+                    <div >
+                        <span class="slds-text-heading--label">Genre: </span><span>{!v.MovieDetail.Genre}</span>
+                        <span></span>
+                    </div>
+                    <div class="slds-text-align--left">
+                        <span class="slds-text-heading--label">Released: </span><span>{!v.MovieDetail.Year}</span>
+                        <span></span>
+                    </div>
+                    <div class="slds-text-align--left">
+                        <span class="slds-text-heading--label">Votes: </span><span>{!v.MovieDetail.imdbVotes}</span>
+                        <span></span>
+                    </div>
+                    <div class="slds-text-align--left">
+                        <span class="slds-text-heading--label">Summary: </span><span>{!v.MovieDetail.Plot}</span>
+                        <span></span>
+                    </div>
+                </div>
+            </lightning:layoutitem>
+            <lightning:layoutitem  flexibility="auto" size="4" padding="around-small">
+                        <iframe width="426" height="240" src="{!v.videoUrl}"></iframe>
+            </lightning:layoutitem>
+            </lightning:layout>
+            
+       </lightning:card>
+        <aura:set attribute="else">
+            <lightning:card iconName="utility:video" class="{!v.toggleCss}">
+                <div class="slds-text-align--center slds-text-heading--large">DANG !!! Movie Not Found</div>
+            </lightning:card>    
+      </aura:set>
+        </aura:if>
+    </aura:if>
+    
+   
+    </div>
+	
+</aura:component>

@@ -1,0 +1,20 @@
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes,forceCommunity:availableForAllPageTypes" access="global" >
+	<aura:attribute name="movie" type="Object"/>
+    <aura:attribute name="Cssclass" type="Boolean"/>
+    <aura:registerEvent name="SelectedMovie" type="c:SelectedMovie"/>
+   <!-- <div class="divClass">!-->
+    <lightning:button onclick="{!c.onMovieClick}" class="{! v.Cssclass ? 'toggleClass' : 'divClass' }">
+           <!-- <lightning:layout>!-->
+        <aura:if isTrue="{!(v.movie.Poster=='N/A')}"> 
+         	<img class="imageClass" src="https://ih1.redbubble.net/image.937055447.2138/poster,504x498,f8f8f8-pad,600x600,f8f8f8.jpg"/>    
+        <aura:set attribute="else">	
+           <img  src="{!v.movie.Poster}"  class="imageClass"/>
+         </aura:set>
+         </aura:if>
+   		<!--</lightning:layout>!-->
+            <span class="{! v.Cssclass ? 'slds-text-heading--label infoClasswithToggle' : 'slds-text-heading--label infoClass' }" size="2">
+                {!v.movie.Title}
+            </span>
+    </lightning:button>
+        <!--</div>!-->
+</aura:component>

@@ -1,0 +1,33 @@
+.THIS.divClass  {
+    width: 720px;
+    height:120px;
+    
+}
+.THIS .imageClass{
+    width: 75px;
+    height: 120px;
+    position: absolute;
+  	left: 0px;
+}
+.THIS .infoClass{
+    position: absolute;
+  	left: 80px;
+    color: #1a1a00;
+     
+}
+.THIS .infoClasswithToggle{
+    position: absolute;
+  	left: 80px;
+    color: white;
+     
+}
+.THIS.toggleClass  {
+     width: 720px;
+    height:120px;
+    background-color:#1a1a00 ;
+    color: white;
+    border-color:black;
+    
+}
+.THIS.toggleClass:hover {background-color: #111111;
+border-color:black;}

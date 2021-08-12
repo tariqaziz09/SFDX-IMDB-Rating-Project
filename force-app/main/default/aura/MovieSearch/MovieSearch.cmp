@@ -1,0 +1,21 @@
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes,forceCommunity:availableForAllPageTypes" access="global" >
+	<aura:handler name="buttonsubmit" event="c:buttonsubmit" action="{!c.onButtonClick}"/>
+    <aura:attribute name="movie" type="String"/>
+    <aura:attribute name="labelValue" type="String" default=""/> 
+    <aura:attribute name="darkModeEnable" type="String" default=""/>
+    <aura:registerEvent name="ToggleChange" type="c:ToggleChange"/>
+    <div class="{!v.darkModeEnable}">
+        <lightning:input type="toggle" name="toggleButton" aura:id="tglbtn" label="{!v.labelValue}" 
+          onchange="{!c.getToggleButtonValue}"/>
+  
+    <div class="FindMovie">
+        <!--<lightning:card title="">!-->
+            <c:MovieRatingComponent/>
+       <!-- </lightning:card>!-->
+    </div>
+    
+    <!--<lightning:card title="Matching Movies">!-->
+  <c:MovieSearchResult movieName="{!v.movie}"/> 
+    <!--</lightning:card>  !-->
+    </div>
+</aura:component>

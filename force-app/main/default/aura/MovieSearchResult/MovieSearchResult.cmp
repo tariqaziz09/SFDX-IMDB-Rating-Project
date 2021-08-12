@@ -1,0 +1,51 @@
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes,forceCommunity:availableForAllPageTypes" access="global"
+                controller="MovieRating">
+    <aura:attribute name="MovieList" type="object[]" access="global"/>
+    <aura:attribute name="movieName" type="String" default=""/>
+    <aura:attribute name="counter" type="Integer" default="1" />
+    <aura:attribute name="disableNext" type="Boolean" default="false"/>
+    <aura:attribute name="toggleCss" type="String" default="" />
+    <aura:handler event="c:ToggleChange" action="{!c.getCss}"/>
+    <aura:handler name="change" value="{!v.movieName}" action="{!c.doSearch}"/>
+    <aura:attribute name="loaded" type="Boolean" default="false" />
+    
+	<aura:if isTrue="{!v.loaded }">
+    <lightning:spinner alternativeText="Loading"/>
+    </aura:if>
+    
+     <!--<lightning:layout multipleRows="true">!-->
+        <aura:if isTrue="{!v.MovieList.length>0}">
+            <lightning:layoutItem >
+            <ui:outputText value="Movies Found with similar Name" />
+            </lightning:layoutItem>    
+            <table class="myBtn" >
+                    <!--<div class="myBtn" size="5">!-->
+                
+    <aura:iteration items="{!v.MovieList}" var="movie">
+        <lightning:layoutItem  size="9" flexibility="grow" class="slds-m-around_small ">
+            		<c:MovieTile movie="{!movie}" Cssclass="{!v.toggleCss}" />
+               </lightning:layoutItem>
+    </aura:iteration>
+            
+            <br/>
+                <!--</tbody>!-->
+            </table>
+       <lightning:layout multipleRows="true">
+            <aura:if isTrue="{!v.counter>1}">
+                <lightning:layoutItem class="slds-grid_vertical-align-left">
+   				<lightning:button variant="brand" label="Show Previous 10" title="Search" onclick="{! c.showPrevious }" /> 
+        		</lightning:layoutItem>
+            </aura:if>
+            <lightning:layoutItem class="slds-grid_vertical-align-right">
+   			<lightning:button variant="brand" label="Show Next 10" title="Search" onclick="{! c.showNext }" disabled= "{!v.disableNext}" />
+             </lightning:layoutItem>
+              </lightning:layout>
+            <aura:set attribute="else">
+                <lightning:layoutItem class="slds-align_absolute-center" flexibility="auto" padding="around-small">
+                    <ui:outputText value="" />
+                </lightning:layoutItem>
+            </aura:set>
+           
+        </aura:if> 
+   <!-- </lightning:layout>  !-->
+</aura:component>
